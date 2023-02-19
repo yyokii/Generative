@@ -6,18 +6,34 @@ import PackageDescription
 let package = Package(
     name: "Generative",
     platforms: [
-        .iOS(.v16)
+        .iOS(.v16),
     ],
     products: [
         .library(
             name: "App",
-            targets: ["Main"]),
+            targets: [
+                "GenerativeImage",
+            ]
+        ),
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/apple/ml-stable-diffusion", from: "0.2.0")
+    ],
     targets: [
         .target(
-            name: "Main",
-            dependencies: []
+            name: "GenerativeImage",
+            dependencies: [
+                "Service"
+            ]
         ),
+        .target(
+            name: "Service",
+            dependencies: [
+                .product(name: "StableDiffusion", package: "ml-stable-diffusion")
+            ],
+            resources: [
+                .copy("StableDiffusion")
+            ]
+        )
     ]
 )

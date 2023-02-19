@@ -6,13 +6,13 @@
 //
 
 import SwiftUI
-import Main
+import GenerativeImage
 
 @main
 struct iOSReleaseApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            GenerateImageView()
         }
     }
 }
